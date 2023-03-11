@@ -1,4 +1,3 @@
-import cron from "node-cron";
 import express, { response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -148,7 +147,7 @@ bot.onText(/\/Yes/, async (msg) => {
           );
         });
     },
-    time ? time : 4
+    time ? time : 5
   );
 });
 
@@ -163,7 +162,7 @@ bot.onText(/\/details/, async (msg) => {
   console.log(details);
   let second;
   let number;
-  let emailid;
+  let emailid, activity_status123, position;
   for (var i = 0; i < details.length; i++) {
     if (i == 1) {
       name = details[i];
@@ -173,6 +172,10 @@ bot.onText(/\/details/, async (msg) => {
       number = details[i];
     } else if (i == 4) {
       emailid = details[i];
+    } else if (i == 5) {
+      activity_status123 = parseInt(details[i]);
+    } else if (i == 6) {
+      position = details[i];
     }
   }
   let x = Number(number);
@@ -182,6 +185,8 @@ bot.onText(/\/details/, async (msg) => {
     lastName: second,
     phoneNumber: x,
     email: emailid,
+    activity_status:activity_status123,
+    position:position
   });
   console.log(user);
   bot.sendMessage(
